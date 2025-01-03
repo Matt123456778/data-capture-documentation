@@ -1,0 +1,19 @@
+The camera has three different states: `~FrameSourceState.Off`, `~FrameSourceState.On` and `~FrameSourceState.Standby`.
+
+Depending on the device, the transition between `~FrameSourceState.Standby` and `~FrameSourceState.On` can be up to 90% faster (up to 50% faster on Android devices) than the transition between `~FrameSourceState.Off` and `~FrameSourceState.On`.
+
+We recommend using `~FrameSourceState.Standby` when the user is likely to be scanning in quick succession. Battery usage in this state is slightly higher than in `~FrameSourceState.Off` (especially on iOS devices), but this is offset by the reduction in total scanning time. This means that in the vast majority of cases there is no overall impact on battery life.
+
+It is important to be selective with usage of the standby state and avoid keeping the camera in standby throughout the entire app. To minimize the additional battery usage it is better to go into standby only on screens where repeated scanning is expected. In cases where the entire app does repeated scanning, keeping the camera in standby throughout the entire app may be worth the additional battery usage.
+
+When using the standby state the typical app flow will similar to the following:
+
+* Move to a screen in the app that has scanning capabilities
+* Change the camera's state to `~FrameSourceState.Standby`
+* Repeatedly change to `~FrameSourceState.On` and back to `~FrameSourceState.Standby` as the user starts and stops scanning
+* When the user moves away from the screen, change the camera state back to `~FrameSourceState.Off`
+
+For apps that are fully centered around scanning it may be a better option to stay in standby throughout at the cost of the slight battery usage increase:
+
+* Start with the camera's state at `~FrameSourceState.Standby`
+* Change to `~FrameSourceState.On` and back to `~FrameSourceState.Standby` as the user starts and stops scanning
