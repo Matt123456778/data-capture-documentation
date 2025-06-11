@@ -38,7 +38,7 @@ See the [LICENSE](./LICENSE) file for licensing information.
 
 ## Local Development
 
-Install all dependencies:
+Install all dependencies:npm i @scandit/web-id-bolt
 
 ```
 $ yarn
